@@ -13,7 +13,7 @@ project 1 - A Random Quote Generator
 const quotes = [
   {
     quote: "Goodbye everyone, I'll remember you all in therapy.",
-    source: "Plankton",
+    source: "Sheldon J. Plankton",
     citation: "The Algae's Always Greener",
     year: 2001
   },
@@ -47,7 +47,10 @@ const quotes = [
 /***
  * `getRandomQuote` function
 ***/
-
+function getRandomQuote(arr) {
+  const randomNumber = Math.floor(Math.random() * arr.length);
+  return arr[randomNumber];
+}
 
 
 /***
