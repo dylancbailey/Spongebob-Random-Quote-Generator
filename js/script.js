@@ -7,6 +7,10 @@ project 1 - A Random Quote Generator
   // Check the "Project Resources" section of the project instructions
   // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
+// Global Variables
+let LAST_QUOTE;
+let LAST_COLOR;
+
 // When page loads initially
 window.addEventListener('load', printQuote);
 
@@ -50,21 +54,50 @@ const quotes = [
 
 const backgroundColors = ["#F22833", "#F97B91", "#0F9DA4", "#268444", "#A37DF5"];
 
+/***
+ * `randomNumber` function
+***/
+function randomNumber(arr) {
+  return Math.floor(Math.random() * arr.length);
+}
 
 /***
  * `getRandomQuote` function
 ***/
-function getRandom(arr) {
-  const randomNumber = Math.floor(Math.random() * arr.length);
-  return arr[randomNumber];
+function getRandomQuote(arr) {
+  let randomQuote = arr[randomNumber(arr)];
+  
+  while (randomQuote === LAST_QUOTE) {
+    randomQuote = arr[randomNumber(arr)];
+  }
+
+  LAST_QUOTE = randomQuote;
+
+  return LAST_QUOTE;
 }
 
+/***
+ * `getRandomColor` function
+***/
+function getRandomColor(arr) {
+  let randomColor = arr[randomNumber(arr)];
+
+  while (randomColor === LAST_COLOR) {
+    randomColor = arr[randomNumber(arr)];
+  }
+
+  LAST_COLOR = randomColor;
+
+  return LAST_COLOR;
+}
 
 /***
  * `printQuote` function
 ***/
 function printQuote() {
-  const randomQuote = getRandom(quotes);
+  const randomQuote = getRandomQuote(quotes);
+  const quoteBox = document.getElementById('quote-box');
+  console.log(randomQuote);
   let htmlString = 
   `
     <p class="quote">${randomQuote.quote}</p>
@@ -81,8 +114,13 @@ function printQuote() {
   }
 
   htmlString += `</p>`;
-  document.getElementById('quote-box').innerHTML = htmlString;
-  document.body.style.backgroundColor = getRandom(backgroundColors);
+
+  if (quoteBox.innerHTML.includes(randomQuote)) {
+    randomQuote = getRandomQuote(quotes);
+  }
+
+  quoteBox.innerHTML = htmlString;
+  document.body.style.backgroundColor = getRandomColor(backgroundColors);
 }
 
 
@@ -90,5 +128,11 @@ function printQuote() {
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
-
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
+
+/***
+ * 10 second interval for quotes
+***/
+setInterval(function() {
+  printQuote();
+}, 10000);
