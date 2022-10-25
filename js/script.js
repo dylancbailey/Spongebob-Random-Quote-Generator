@@ -24,19 +24,21 @@ const quotes = [
     quote: "Did you smell it? That smell. A kind of smelly smell. The smelly smell that smells...smelly.",
     source: "Mr. Krabs",
     citation: "Help Wanted",
-    year: 1999
+    year: 1999,
+    tag: "S1E1"
   },
   {
     quote: "The inner machinations of my mind are an enigma.",
     source: "Patrick Star",
     citation: "The Secret Box",
-    year: 2001
+    year: 2001,
+    tag: "S2E35"
   },
   {
     quote: "If I were to die right now in a fiery explosion due to the carelessness of a friend…. Then it would just be alright.",
     source: "Spongebob Squarepants",
     citation: "Dying For Pie",
-    year: 2000
+    // year: 2000
   },
   {
     quote: "This is not your average, everyday darkness. This is… ADVANCED darkness.",
@@ -46,11 +48,13 @@ const quotes = [
   },
 ];
 
+const backgroundColors = ["#F22833", "#F97B91", "#0F9DA4", "#268444", "#A37DF5"];
+
 
 /***
  * `getRandomQuote` function
 ***/
-function getRandomQuote(arr) {
+function getRandom(arr) {
   const randomNumber = Math.floor(Math.random() * arr.length);
   return arr[randomNumber];
 }
@@ -60,23 +64,25 @@ function getRandomQuote(arr) {
  * `printQuote` function
 ***/
 function printQuote() {
-  const randomQuote = getRandomQuote(quotes);
+  const randomQuote = getRandom(quotes);
   let htmlString = 
   `
     <p class="quote">${randomQuote.quote}</p>
-    <p class="source">${randomQuote.source} 
-  `;
+    <p class="source">${randomQuote.source}`;
 
   if (randomQuote.hasOwnProperty("citation")) {
-    htmlString += `<span class="citation">${randomQuote.citation}</span>`
-    console.log('Object has citation');
+    htmlString += `<span class="citation">${randomQuote.citation}</span>`;
   }
   if (randomQuote.hasOwnProperty("year")) {
     htmlString += `<span class="year">${randomQuote.year}</span>`;
   }
+  if (randomQuote.hasOwnProperty("tag")) {
+    htmlString += `<p class="tag">${randomQuote.tag}</p>`;
+  }
 
   htmlString += `</p>`;
   document.getElementById('quote-box').innerHTML = htmlString;
+  document.body.style.backgroundColor = getRandom(backgroundColors);
 }
 
 
