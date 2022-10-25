@@ -11,9 +11,6 @@ project 1 - A Random Quote Generator
 let LAST_QUOTE;
 let LAST_COLOR;
 
-// When page loads initially
-window.addEventListener('load', printQuote);
-
 /*** 
  * `quotes` array 
 ***/
@@ -83,18 +80,18 @@ const backgroundColors = ["#F22833", "#F97B91", "#0F9DA4", "#268444", "#A37DF5"]
 /***
  * `randomNumber` function
 ***/
-function randomNumber(arr) {
-  return Math.floor(Math.random() * arr.length);
+function randomElement(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 /***
  * `getRandomQuote` function
 ***/
 function getRandomQuote(arr) {
-  let randomQuote = arr[randomNumber(arr)];
+  let randomQuote = randomElement(arr);
   
   while (randomQuote === LAST_QUOTE) {
-    randomQuote = arr[randomNumber(arr)];
+    randomQuote = randomElement(arr);
   }
 
   LAST_QUOTE = randomQuote;
@@ -106,10 +103,10 @@ function getRandomQuote(arr) {
  * `getRandomColor` function
 ***/
 function getRandomColor(arr) {
-  let randomColor = arr[randomNumber(arr)];
+  let randomColor = randomElement(arr);
 
   while (randomColor === LAST_COLOR) {
-    randomColor = arr[randomNumber(arr)];
+    randomColor = randomElement(arr);
   }
 
   LAST_COLOR = randomColor;
@@ -148,12 +145,10 @@ function printQuote() {
   document.body.style.backgroundColor = getRandomColor(backgroundColors);
 }
 
-
 /***
- * click event listener for the print quote button
- * DO NOT CHANGE THE CODE BELOW!!
+ * When page loads initially
 ***/
-document.getElementById('load-quote').addEventListener("click", printQuote, false);
+window.addEventListener('load', printQuote);
 
 /***
  * 10 second interval for quotes
@@ -161,3 +156,9 @@ document.getElementById('load-quote').addEventListener("click", printQuote, fals
 setInterval(function() {
   printQuote();
 }, 10000);
+
+/***
+ * click event listener for the print quote button
+ * DO NOT CHANGE THE CODE BELOW!!
+***/
+document.getElementById('load-quote').addEventListener("click", printQuote, false);
