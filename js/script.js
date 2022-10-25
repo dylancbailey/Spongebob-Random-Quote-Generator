@@ -18,8 +18,6 @@ const quotes = [
   {
     quote: "Goodbye everyone, I'll remember you all in therapy.",
     source: "Sheldon J. Plankton",
-    // citation: "The Algae's Always Greener",
-    // year: 2001
   },
   {
     quote: "Did you smell it? That smell. A kind of smelly smell. The smelly smell that smells...smelly.",
@@ -39,7 +37,6 @@ const quotes = [
     quote: "If I were to die right now in a fiery explosion due to the carelessness of a friend…. Then it would just be alright.",
     source: "Spongebob Squarepants",
     citation: "Dying For Pie",
-    // year: 2000
   },
   {
     quote: "This is not your average, everyday darkness. This is… ADVANCED darkness.",
