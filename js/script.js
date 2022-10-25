@@ -7,14 +7,17 @@ project 1 - A Random Quote Generator
   // Check the "Project Resources" section of the project instructions
   // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
-// Global Variables
+/*** 
+ * Global variables 
+***/
 let LAST_QUOTE;
 let LAST_COLOR;
+let TIMER;
 
 /*** 
  * `quotes` array 
 ***/
-const quotes = [
+const QUOTES = [
   {
     quote: "Goodbye everyone, I'll remember you all in therapy.",
     source: "Sheldon J. Plankton",
@@ -72,7 +75,7 @@ const quotes = [
   }
 ];
 
-const backgroundColors = ["#F22833", "#F97B91", "#0F9DA4", "#268444", "#A37DF5"];
+const BACKGROUND_COLORS = ["#F22833", "#F97B91", "#0F9DA4", "#268444", "#A37DF5"];
 
 /***
  * `randomNumber` function
@@ -115,7 +118,7 @@ function getRandomColor(arr) {
  * `printQuote` function
 ***/
 function printQuote() {
-  const randomQuote = getRandomQuote(quotes);
+  const randomQuote = getRandomQuote(QUOTES);
   const quoteBox = document.getElementById('quote-box');
   let htmlString = 
   `
@@ -134,25 +137,19 @@ function printQuote() {
 
   htmlString += `</p>`;
 
-  if (quoteBox.innerHTML.includes(randomQuote)) {
-    randomQuote = getRandomQuote(quotes);
-  }
-
   quoteBox.innerHTML = htmlString;
-  document.body.style.backgroundColor = getRandomColor(backgroundColors);
+  document.body.style.backgroundColor = getRandomColor(BACKGROUND_COLORS);
+  
+  clearInterval(TIMER);
+  TIMER = setInterval(function() {
+    printQuote();
+  }, 10000);
 }
 
 /***
  * When page loads initially
 ***/
 window.addEventListener('load', printQuote);
-
-/***
- * 10 second interval for quotes
-***/
-setInterval(function() {
-  printQuote();
-}, 10000);
 
 /***
  * click event listener for the print quote button
