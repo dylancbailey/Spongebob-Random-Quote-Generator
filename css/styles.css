@@ -155,12 +155,12 @@ h1 {
   }
 
   .quote {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   .quote:before,
   .quote:after {
-    font-size: 6rem;
+    font-size: 5rem;
   }
 
   .quote:before {
