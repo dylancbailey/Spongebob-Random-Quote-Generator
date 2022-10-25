@@ -14,8 +14,8 @@ const quotes = [
   {
     quote: "Goodbye everyone, I'll remember you all in therapy.",
     source: "Sheldon J. Plankton",
-    citation: "The Algae's Always Greener",
-    year: 2001
+    // citation: "The Algae's Always Greener",
+    // year: 2001
   },
   {
     quote: "Did you smell it? That smell. A kind of smelly smell. The smelly smell that smells...smelly.",
@@ -56,7 +56,25 @@ function getRandomQuote(arr) {
 /***
  * `printQuote` function
 ***/
+function printQuote() {
+  const randomQuote = getRandomQuote(quotes);
+  let htmlString = 
+  `
+    <p class="quote">${randomQuote.quote}</p>
+    <p class="source">${randomQuote.source} 
+  `;
 
+  if (randomQuote.hasOwnProperty("citation")) {
+    htmlString += `<span class="citation">${randomQuote.citation}</span>`
+    console.log('Object has citation');
+  }
+  if (randomQuote.hasOwnProperty("year")) {
+    htmlString += `<span class="year">${randomQuote.year}</span>`;
+  }
+
+  htmlString += `</p>`;
+  document.getElementById('quote-box').innerHTML = htmlString;
+}
 
 
 /***
